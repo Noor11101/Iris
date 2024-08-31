@@ -1,0 +1,90 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصنف زهور Iris</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .chart-container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>مصنف زهور Iris</h1>
+    <form method="POST">
+        <label for="sepal_length">طول السبلة (سم):</label>
+        <input type="number" step="0.1" name="sepal_length" required>
+        
+        <label for="sepal_width">عرض السبلة (سم):</label>
+        <input type="number" step="0.1" name="sepal_width" required>
+        
+        <label for="petal_length">طول البتلة (سم):</label>
+        <input type="number" step="0.1" name="petal_length" required>
+        
+        <label for="petal_width">عرض البتلة (سم):</label>
+        <input type="number" step="0.1" name="petal_width" required>
+        
+        <input type="submit" value="تصنيف">
+    </form>
+    
+    <div class="chart-container">
+        <h2>توزيع بيانات Iris</h2>
+        <div id="chart"></div>
+    </div>
+    
+    <p>دقة النموذج: {{ "%.2f"|format(accuracy*100) }}%</p>
+
+    <script>
+        var graphJSON = {{ graph_json|safe }};
+        Plotly.plot('chart', graphJSON.data, graphJSON.layout);
+    </script>
+</body>
+</html>

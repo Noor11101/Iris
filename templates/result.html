@@ -1,0 +1,68 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتيجة التصنيف</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .result {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        a {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>نتيجة التصنيف</h1>
+    <div class="result">
+        <h2>النوع المتوقع للزهرة هو: {{ result }}</h2>
+    </div>
+    
+    <div class="chart-container">
+        <h2>احتمالات التصنيف</h2>
+        <div id="chart"></div>
+    </div>
+    
+    <a href="/">العودة للصفحة الرئيسية</a>
+
+    <script>
+        var graphJSON = {{ graph_json|safe }};
+        Plotly.plot('chart', graphJSON.data, graphJSON.layout);
+    </script>
+</body>
+</html>
